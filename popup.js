@@ -1,5 +1,17 @@
 // 除外するパスリスト
-const excludedPaths = ["directory", "turbo", "p", "downloads", "jobs", "privacy", "search"];
+const excludedPaths = [
+  "videos",
+  "directory",
+  "turbo",
+  "p",
+  "downloads",
+  "jobs",
+  "privacy",
+  "search",
+  "annual-recap",
+  "settings",
+  "subscriptions",
+];
 
 // タブの情報を取得してユーザーIDリストを生成
 chrome.tabs.query({}, (tabs) => {

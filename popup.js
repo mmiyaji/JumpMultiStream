@@ -1,17 +1,26 @@
-// 除外するパスリスト
-const excludedPaths = [
-  "videos",
-  "directory",
-  "turbo",
-  "p",
-  "downloads",
-  "jobs",
-  "privacy",
-  "search",
-  "annual-recap",
-  "settings",
-  "subscriptions",
-];
+// 初期化: 設定値を読み込む
+let excludedPaths = [];
+let destinationSite = "https://multistre.am/";
+
+chrome.storage.sync.get(['excludedUrls', 'destinationSite'], (data) => {
+  // 除外リストを初期化（設定されていない場合デフォルト値を使用）
+  excludedPaths = (data.excludedUrls ? data.excludedUrls.split(",").map(url => url.trim()) : [
+    "videos",
+    "directory",
+    "turbo",
+    "p",
+    "downloads",
+    "jobs",
+    "privacy",
+    "search",
+    "annual-recap",
+    "settings",
+    "subscriptions"
+  ]);
+
+  // 遷移先サイトを初期化（設定されていない場合デフォルト値を使用）
+  destinationSite = data.destinationSite || "https://multistre.am/";
+});
 
 // タブの情報を取得してユーザーIDリストを生成
 chrome.tabs.query({}, (tabs) => {
@@ -81,9 +90,15 @@ document.getElementById("openMultiStream").addEventListener("click", () => {
     .map(input => input.value);
 
   if (selectedUsers.length > 0) {
-    const multiStreamUrl = `https://multistre.am/${selectedUsers.join("/")}/`;
+    // 設定された遷移先サイトを使用
+    const multiStreamUrl = `${destinationSite}${selectedUsers.join("/")}/`;
     chrome.tabs.create({ url: multiStreamUrl });
   } else {
     alert("Please select at least one user.");
   }
+});
+
+// 設定アイコンがクリックされた際に、設定画面に遷移
+document.getElementById('settings-icon').addEventListener('click', () => {
+  chrome.runtime.openOptionsPage();
 });

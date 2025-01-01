@@ -52,17 +52,20 @@ chrome.tabs.query({}, (tabs) => {
     })
     .filter(user => user); // null を除外
 
-  if (twitchUsers.length === 0) {
+  // 重複を除外
+  const uniqueUsers = [...new Set(twitchUsers)];
+
+  if (uniqueUsers.length === 0) {
     // ユーザーIDが見つからない場合、ポップアップにメッセージを表示
     const noUsersMessage = document.createElement("p");
-    noUsersMessage.textContent = "The Twitch user you are viewing cannot be found. Please open the streaming page in a another tab.";
+    noUsersMessage.textContent = "The Twitch user you are viewing cannot be found. Please open the streaming page in another tab.";
     noUsersMessage.className = "text-danger text-center mt-3";
     userList.appendChild(noUsersMessage);
     return;
   }
 
   // ユーザーIDをチェックボックスリストとして表示
-  twitchUsers.forEach(user => {
+  uniqueUsers.forEach(user => {
     const listItem = document.createElement("li");
     listItem.className = "list-group-item";
 

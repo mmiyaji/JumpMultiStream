@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Jump MultiStream",
   "description": "Twitchで視聴中の配信を同時表示するための拡張機能です。別タブで表示したいTwitch配信ページを開いてから拡張機能のアイコンをクリックすると利用できます。",
-  "version": "1.0",
+  "version": "1.1",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",
@@ -11,9 +11,6 @@
   },
   "action": {
     "default_popup": "popup.html"
-  },
-  "background": {
-    "service_worker": "background.js"
   },
   "host_permissions": ["https://*.twitch.tv/*"],
   "permissions": ["tabs", "storage"],

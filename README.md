@@ -11,6 +11,7 @@ Twitch配信をマルチ表示するためのサイトは以下が対応して�
 - Multistre.am ( https://multistre.am/ )
 - Twitch Theater ( https://twitchtheater.tv/ )
 - MultiTwitch ( https://multitwitch.tv/ )
+- Rare Drop Mult ( https://multi.raredrop.co/ )
 
 ## 使い方
 
